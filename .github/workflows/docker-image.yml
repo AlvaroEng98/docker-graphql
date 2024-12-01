@@ -28,7 +28,7 @@ jobs:
     - name: Construir imagen
       
       run: |
-        docker build . --file Dockerfile --tag docker build valadordev/docker-graphql:0.0.2 .
+        docker build -t valadordev/docker-graphql:0.0.2 .
      
     - name: Push imagen
 
