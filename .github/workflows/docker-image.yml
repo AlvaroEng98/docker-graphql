@@ -31,7 +31,7 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}      #SI SE GENERA UN TOKEN PARA LOGUEARSE EN DOCKER
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  #contraseña del token
-        NEW_VERSION: ${{ steps.version.version }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
 
 
       run: |
