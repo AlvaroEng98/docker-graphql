@@ -23,7 +23,7 @@ jobs:
       with:
         major_pattern: "major:"
         minor_pattern: "feat:"
-        format: "${major}.${minor}.${patch}-prerelease{increment}"
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
       id: version
         
 
@@ -36,17 +36,25 @@ jobs:
 
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "New Version: $NEW_VERSION!!!!!! "
 
     - name: Construir imagen
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       
       run: |
-        docker build -t valadordev/docker-graphql:0.0.2 .
-     
-    - name: Push imagen
+        docker build -t valadordev/docker-graphql:$NEW_VERSION .
+        docker build -t valadordev/docker-graphql
 
+
+    - name: Push imagen
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+    
       run: |
-        docker push valadordev/docker-graphql:0.0.2
+        docker push valadordev/docker-graphql:$NEW_VERSION
+        docker push valadordev/docker-graphql
+
+        
     #- name: Build the Docker image
       
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
