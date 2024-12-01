@@ -23,9 +23,17 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}      #SI SE GENERA UN TOKEN PARA LOGUEARSE EN DOCKER
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  #contraseña del token
       run: |
-        echo "Iniciando Login"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    - name: Construir imagen
       
+      run: |
+        docker build . --file Dockerfile --tag docker build valadordev/docker-graphql:0.0.2 .
+     
+    - name: Push imagen
+
+      run: |
+        docker push valadordev/docker-graphql:0.0.2 .
     #- name: Build the Docker image
       
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
