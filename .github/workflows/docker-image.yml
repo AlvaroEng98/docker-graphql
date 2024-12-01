@@ -21,7 +21,7 @@ jobs:
     - name: Docker Login
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}      #SI SE GENERA UN TOKEN PARA LOGUEARSE EN DOCKER
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_USER }}  #contraseña del token
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  #contraseña del token
       run: |
         echo "Iniciando Login"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
