@@ -19,7 +19,7 @@ jobs:
         fetch-depth: 0
 
     - name: Git Semantic Version
-      uses: PaulHatch/semantic-version@v5.0.0
+      uses: PaulHatch/semantic-version@v4.0.3
       with:
         major_pattern: "major:"
         minor_pattern: "feat:"
@@ -42,19 +42,14 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       
       run: |
-        docker build -t valadordev/docker-graphql:$NEW_VERSION .
-        docker build -t valadordev/docker-graphql
-
-
+        docker build -t valadordev/docker-graphql:0.0.2 .
+     
     - name: Push imagen
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
     
       run: |
-        docker push valadordev/docker-graphql:$NEW_VERSION
-        docker push valadordev/docker-graphql
-
-        
+        docker push valadordev/docker-graphql:0.0.2
     #- name: Build the Docker image
       
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
